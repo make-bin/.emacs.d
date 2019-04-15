@@ -1,6 +1,20 @@
 ;;(package-initialize)
 
+(add-to-list 'load-path "~/.emacs.d/lisp/")
 
+(require 'go-mode)
+(add-hook 'before-save-hook 'gofmt-before-save)
+
+;;config PATH use shell path
+(defun set-exec-path-from-shell-PATH ()
+  (let ((path-from-shell (replace-regexp-in-string
+                          "[ \t\n]*$"
+                          ""
+                          (shell-command-to-string "$SHELL --login -i -c 'echo $PATH'"))))
+    (setenv "PATH" path-from-shell)
+    (setq eshell-path-env path-from-shell) ; for eshell users
+    (setq exec-path (split-string path-from-shell path-separator))))
+(when window-system (set-exec-path-from-shell-PATH))
 
 ;; melpa
 (when (>= emacs-major-version 24)
@@ -67,6 +81,10 @@
   (interactive)
   (find-file "~/.emacs.d/init.el"))
 (global-set-key (kbd "<f2>") 'open-my-init-file)
+
+
+
+
 
 ;;开启全局补全
 (global-company-mode t)
