@@ -145,6 +145,8 @@
 ;;(add-hook 'emacs-lisp-mode-hook 'smartparens-mode)
 (smartparens-global-mode t)
 
+;;set tab width with 4
+(setq-default tab-width 4)
 
 ;; find key
 (global-set-key (kbd "C-h C-f") 'find-function)
