@@ -58,9 +58,10 @@
 	(package-install pkg))))
 
 ;; config for go-mode
-(add-to-list 'load-path "~/.emacs.d/elpa/go-mode-20181012.329/")
-(autoload 'go-mode "go-mode" nil t)
-(add-to-list 'auto-mode-alist '("\\.go\\'" . go-mode))
+;;(add-to-list 'load-path "~/.emacs.d/elpa/go-mode-20181012.329/")
+;;(autoload 'go-mode "go-mode" nil t)
+;;(add-to-list 'auto-mode-alist '("\\.go\\'" . go-mode))
+(add-hook 'before-save-hook 'gofmt-before-save)
 
 
 ;; 关闭工具栏，tool-bar-mode 即为一个 Minor Mode
@@ -83,10 +84,6 @@
   (interactive)
   (find-file "~/.emacs.d/init.el"))
 (global-set-key (kbd "<f2>") 'open-my-init-file)
-
-
-
-
 
 ;;开启全局补全
 (global-company-mode t)
@@ -120,7 +117,6 @@
 
 ;;显示当前行高亮
 (global-hl-line-mode t)
-
 
 ;;加载主题
 (load-theme 'monokai t)
@@ -171,12 +167,12 @@
 
 ;; Completion framework
 (require 'company-ycmd)
-;;(company-ycmd-setup)
+(company-ycmd-setup)
 (add-hook 'after-init-hook #'global-company-mode)
 
 ;; Enable flycheck
 (require 'flycheck-ycmd)
-;;(flycheck-ycmd-setup)
+(flycheck-ycmd-setup)
 (add-hook 'after-init-hook #'global-flycheck-mode)
 
 
