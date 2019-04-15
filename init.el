@@ -1,9 +1,9 @@
-;;(package-initialize)
+;;; Commentary:
 
-(add-to-list 'load-path "~/.emacs.d/lisp/")
-
-(require 'go-mode)
-(add-hook 'before-save-hook 'gofmt-before-save)
+;;; Code:
+;;;(add-to-list 'load-path "~/.emacs.d/lisp/")
+;;;(require 'go-mode)
+;;;(add-hook 'before-save-hook 'gofmt-before-save)
 
 ;;config PATH use shell path
 (defun set-exec-path-from-shell-PATH ()
@@ -23,10 +23,8 @@
      (setq package-archives '(("gnu"   . "http://elpa.emacs-china.org/gnu/")
 		      ("melpa" . "http://elpa.emacs-china.org/melpa/"))))
 ;; 注意 elpa.emacs-china.org 是 Emacs China 中文社区在国内搭建的一个 ELPA 镜像
-
 ;; cl - Common Lisp Extension
 (require 'cl)
-
 ;; Add Packages
 (defvar my/packages '(
 	              ;; --- Auto-completion ---
@@ -38,6 +36,10 @@
 	              ;; --- Themes ---
 	              monokai-theme
 		      popwin
+		      go-mode
+		      ycmd
+		      company-ycmd
+		      flycheck-ycmd
 	       ;; solarized-theme
 	       ) "Default packages")
 
@@ -55,10 +57,10 @@
       (when (not (package-installed-p pkg))
 	(package-install pkg))))
 
-;; Find Executable Path on OS X
-;;(when (memq window-system '(mac ns))
-;;  (exec-path-from-shell-initialize))
-
+;; config for go-mode
+(add-to-list 'load-path "~/.emacs.d/elpa/go-mode-20181012.329/")
+(autoload 'go-mode "go-mode" nil t)
+(add-to-list 'auto-mode-alist '("\\.go\\'" . go-mode))
 
 
 ;; 关闭工具栏，tool-bar-mode 即为一个 Minor Mode
@@ -148,38 +150,34 @@
 (smartparens-global-mode t)
 
 
-
-
+;; find key
 (global-set-key (kbd "C-h C-f") 'find-function)
 (global-set-key (kbd "C-h C-v") 'find-variable)
 (global-set-key (kbd "C-h C-k") 'find-function-on-key)
 
+;; org
 (setq org-agenda-files '("~/org"))
 (global-set-key (kbd "C-c a") 'org-agenda)
 
 
 ;;ycmd
-;;(require 'ycmd)
-;;(add-hook 'after-init-hook #'global-ycmd-mode)
+(require 'ycmd)
+(add-hook 'after-init-hook #'global-ycmd-mode)
 
 ;; Specify how to run the server
-;;(set-variable 'ycmd-server-command '("python" "/Users/makebin/.emacs.d/ycmd/ycmd"))
+(set-variable 'ycmd-server-command '("python" "/Users/makebin/.emacs.d/ycmd/ycmd"))
 ;; Specify a global emacs configuration
-;;(set-variable 'ycmd-global-config "/Users/makebin/.emacs.d/ycmd/examples/.ycm_extra_conf.py")
+(set-variable 'ycmd-global-config "/Users/makebin/.emacs.d/ycmd/examples/.ycm_extra_conf.py")
 
 ;; Completion framework
-;;(require 'company-ycmd)
+(require 'company-ycmd)
 ;;(company-ycmd-setup)
-;;(add-hook 'after-init-hook #'global-company-mode)  
+(add-hook 'after-init-hook #'global-company-mode)
 
 ;; Enable flycheck
-;;(require 'flycheck-ycmd)
+(require 'flycheck-ycmd)
 ;;(flycheck-ycmd-setup)
-;;(add-hook 'after-init-hook #'global-flycheck-mode)  
-
-;; Set always complete immediately
-;;(setq company-idle-delay 0)
-
+(add-hook 'after-init-hook #'global-flycheck-mode)
 
 
 (custom-set-variables
@@ -187,7 +185,7 @@
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
- '(company-idle-delay 0.08)
+ '(company-idle-delay 0)
  '(company-minimum-prefix-length 1)
  '(custom-safe-themes
    (quote
