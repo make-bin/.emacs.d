@@ -34,7 +34,8 @@
 		      counsel
 		      smartparens
 	              ;; --- Themes ---
-	              monokai-theme
+			  monokai-theme
+			  spacemacs-theme
 		      popwin
 		      go-mode
 		      ycmd
@@ -63,6 +64,17 @@
 ;;(add-to-list 'auto-mode-alist '("\\.go\\'" . go-mode))
 (add-hook 'before-save-hook 'gofmt-before-save)
 
+
+
+;;config for spacemacs-theme'
+(require 'spacemacs-common)
+(deftheme spacemacs-dark "Spacemacs theme,the dark version")
+(create-spacemacs-theme 'dark 'spacemacs-dark)
+(provide-theme 'spacemacs-dark)
+
+;;加载主题
+;;(load-theme 'monokai t)
+(load-theme 'spacemacs-dark t)
 
 ;; 关闭工具栏，tool-bar-mode 即为一个 Minor Mode
 (tool-bar-mode -1)
@@ -119,9 +131,6 @@
 
 ;;显示当前行高亮
 (global-hl-line-mode t)
-
-;;加载主题
-(load-theme 'monokai t)
 
 ;;加载插件
 (require 'hungry-delete)
