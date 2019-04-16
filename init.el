@@ -97,10 +97,10 @@
 
 
 ;;打开最近编辑的文件
-(require 'recentf)
-(recentf-mode 1)
-(setq recentf-max-menu-item 10)
-(global-set-key "\C-x\ \C-r" 'recentf-open-files)
+;;(require 'recentf)
+;;(recentf-mode 1)
+;;(setq recentf-max-menu-item 10)
+;;(global-set-key "\C-x\ \C-r" 'recentf-open-files)
 
 ;;org文件中显示语法
 (require 'org)
