@@ -95,6 +95,8 @@
 (require 'popwin)
 (popwin-mode 1)
 
+;;关闭自动保存
+(setq auto-save-default nil) 
 
 ;;打开最近编辑的文件
 ;;(require 'recentf)
