@@ -43,6 +43,7 @@
 		      flycheck-ycmd
 			  all-the-icons
 			  neotree
+			  helm-ag
 	       ;; solarized-theme
 	       ) "Default packages")
 
@@ -77,8 +78,19 @@
 ;;(load-theme 'monokai t)
 (load-theme 'spacemacs-dark t)
 
+;;config for all-the-icons
+(require 'all-the-icons)
+
+;;config for neotree
+(require 'neotree)
+(global-set-key (kbd "C-c p t") 'neotree-toggle)
+(setq neo-theme (if (display-graphic-p) 'icons 'arrow))
 
 
+;;config for helm-ag
+(require 'helm-ag)
+(global-set-key (kbd "C-c s f") 'helm-do-ag-this-file)
+(global-set-key (kbd "C-c s p") 'helm-ag-project-root)
 (custom-set-variables
  ;; custom-set-variables was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
@@ -89,6 +101,11 @@
  '(custom-safe-themes
    (quote
 	("bd7b7c5df1174796deefce5debc2d976b264585d51852c962362be83932873d9" default)))
+ '(helm-ag-base-command "ag --nocolor --nogroup --ignore-case")
+ '(helm-ag-command-option "--all-text")
+ '(helm-ag-fuzzy-match t)
+ '(helm-ag-ignore-buffer-patterns (quote ("\\.txt\\'" "\\.mkd\\'")))
+ '(helm-ag-insert-at-point (quote symbol))
  '(package-selected-packages
    (quote
 	(adjust-parens company hungry-delete swiper counsel smartparens monokai-theme spacemacs-theme popwin go-mode ycmd company-ycmd flycheck-ycmd neotree)))
@@ -99,14 +116,8 @@
 	 (var . "#756df7")
 	 (base . "#ffffff")))))
 
-;;config for all-the-icons
-(require 'all-the-icons)
 
 
-;;config for neotree
-(require 'neotree)
-(global-set-key (kbd "C-c p t") 'neotree-toggle)
-(setq neo-theme (if (display-graphic-p) 'icons 'arrow))
 
 ;; 关闭工具栏，tool-bar-mode 即为一个 Minor Mode
 (tool-bar-mode -1)
