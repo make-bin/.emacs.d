@@ -41,6 +41,8 @@
 		      ycmd
 		      company-ycmd
 		      flycheck-ycmd
+			  all-the-icons
+			  neotree
 	       ;; solarized-theme
 	       ) "Default packages")
 
@@ -71,10 +73,40 @@
 (deftheme spacemacs-dark "Spacemacs theme,the dark version")
 (create-spacemacs-theme 'dark 'spacemacs-dark)
 (provide-theme 'spacemacs-dark)
-
 ;;加载主题
 ;;(load-theme 'monokai t)
 (load-theme 'spacemacs-dark t)
+
+
+
+(custom-set-variables
+ ;; custom-set-variables was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ '(company-idle-delay 0)
+ '(company-minimum-prefix-length 1)
+ '(custom-safe-themes
+   (quote
+	("bd7b7c5df1174796deefce5debc2d976b264585d51852c962362be83932873d9" default)))
+ '(package-selected-packages
+   (quote
+	(adjust-parens company hungry-delete swiper counsel smartparens monokai-theme spacemacs-theme popwin go-mode ycmd company-ycmd flycheck-ycmd neotree)))
+ '(spacemacs-theme-custom-colors
+   (quote
+	((act1 . "#ff0000")
+	 (act2 . "#0000ff")
+	 (var . "#756df7")
+	 (base . "#ffffff")))))
+
+;;config for all-the-icons
+(require 'all-the-icons)
+
+
+;;config for neotree
+(require 'neotree)
+(global-set-key (kbd "C-c p t") 'neotree-toggle)
+(setq neo-theme (if (display-graphic-p) 'icons 'arrow))
 
 ;; 关闭工具栏，tool-bar-mode 即为一个 Minor Mode
 (tool-bar-mode -1)
@@ -189,16 +221,7 @@
 (add-hook 'after-init-hook #'global-flycheck-mode)
 
 
-(custom-set-variables
- ;; custom-set-variables was added by Custom.
- ;; If you edit it by hand, you could mess it up, so be careful.
- ;; Your init file should contain only one such instance.
- ;; If there is more than one, they won't work right.
- '(company-idle-delay 0)
- '(company-minimum-prefix-length 1)
- '(custom-safe-themes
-   (quote
-    ("bd7b7c5df1174796deefce5debc2d976b264585d51852c962362be83932873d9" default))))
+
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
