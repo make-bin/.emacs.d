@@ -43,6 +43,7 @@
 		      flycheck-ycmd
 			  all-the-icons
 			  neotree
+			  imenu-list
 			  helm-ag
 			  shell-pop
 	       ;; solarized-theme
@@ -86,6 +87,11 @@
 (require 'neotree)
 (global-set-key (kbd "C-c p t") 'neotree-toggle)
 (setq neo-theme (if (display-graphic-p) 'icons 'arrow))
+
+;;config imenu-list
+(global-set-key (kbd "C-'") 'imenu-list-smart-toggle)'
+(setq imenu-list-auto-resize t)
+(setq imenu-list-after-jump-hook nil)
 
 
 ;;config for helm-ag
