@@ -44,6 +44,7 @@
 			  all-the-icons
 			  neotree
 			  helm-ag
+			  shell-pop
 	       ;; solarized-theme
 	       ) "Default packages")
 
@@ -91,6 +92,11 @@
 (require 'helm-ag)
 (global-set-key (kbd "C-c s f") 'helm-do-ag-this-file)
 (global-set-key (kbd "C-c s p") 'helm-ag-project-root)
+
+;;config for shell-pop
+(require 'shell-pop)
+
+
 (custom-set-variables
  ;; custom-set-variables was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
@@ -109,6 +115,17 @@
  '(package-selected-packages
    (quote
 	(adjust-parens company hungry-delete swiper counsel smartparens monokai-theme spacemacs-theme popwin go-mode ycmd company-ycmd flycheck-ycmd neotree)))
+ '(shell-pop-default-directory "/Users/kyagi/git")
+ '(shell-pop-full-span t)
+ '(shell-pop-shell-type
+   (quote
+	("ansi-term" "*ansi-term*"
+	 (lambda nil
+	   (ansi-term shell-pop-term-shell)))))
+ '(shell-pop-term-shell "/bin/bash")
+ '(shell-pop-universal-key "C-t")
+ '(shell-pop-window-position "right")
+ '(shell-pop-window-size 30)
  '(spacemacs-theme-custom-colors
    (quote
 	((act1 . "#ff0000")
