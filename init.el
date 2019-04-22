@@ -46,6 +46,7 @@
 			  imenu-list
 			  helm-ag
 			  shell-pop
+			  projectile
 	       ;; solarized-theme
 	       ) "Default packages")
 
@@ -86,6 +87,8 @@
 ;;config for neotree
 (require 'neotree)
 (global-set-key (kbd "C-c p t") 'neotree-toggle)
+;;(global-set-key (kbd "C-c p t") 'neotree-projectile-action)
+
 (setq neo-theme (if (display-graphic-p) 'icons 'arrow))
 (setq-default neo-autorefresh t)
 
@@ -102,6 +105,9 @@
 
 ;;config for shell-pop
 (require 'shell-pop)
+
+;;config projectile
+(require 'projectile)
 
 
 (custom-set-variables
