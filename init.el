@@ -87,6 +87,7 @@
 (require 'neotree)
 (global-set-key (kbd "C-c p t") 'neotree-toggle)
 (setq neo-theme (if (display-graphic-p) 'icons 'arrow))
+(setq-default neo-autorefresh t)
 
 ;;config imenu-list
 (global-set-key (kbd "C-'") 'imenu-list-smart-toggle)'
