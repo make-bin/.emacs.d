@@ -1,0 +1,1 @@
+("~/.emacs.d/" "~/go/src/github.com/spotahome/redis-operator/" "~/go/src/github.com/spotahome/kooper/")

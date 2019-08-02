@@ -47,6 +47,8 @@
 			  helm-ag
 			  shell-pop
 			  projectile
+			  yaml-mode
+		;;	  ace-window
 	       ;; solarized-theme
 	       ) "Default packages")
 
