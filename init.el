@@ -21,6 +21,7 @@
      (require 'package)
      (package-initialize)
      (setq package-archives '(("gnu"   . "http://elpa.emacs-china.org/gnu/")
+							  ("org"   . "https://orgmode.org/elpa/")
 		      ("melpa" . "http://elpa.emacs-china.org/melpa/"))))
 ;; 注意 elpa.emacs-china.org 是 Emacs China 中文社区在国内搭建的一个 ELPA 镜像
 ;; cl - Common Lisp Extension
@@ -38,6 +39,7 @@
 			  spacemacs-theme
 		      popwin
 		      go-mode
+			  org-plus-contrib
 		      ycmd
 		      company-ycmd
 		      flycheck-ycmd
@@ -194,6 +196,13 @@
 ;;org文件中显示语法
 (require 'org)
 (setq org-src-fontify-natively t)
+;; org
+;;(setq org-agenda-files '("~/org"))
+;;(global-set-key (kbd "C-c a") 'org-agenda)
+;; 打开 org-indent mode
+;;(setq org-startup-indented t)
+;; 设置 bullet list
+;;(setq org-bullets-bullet-list '("☰" "☷" "☯" "☭"))
 
 ;;选中删除替换
 (delete-selection-mode t)
@@ -238,10 +247,6 @@
 (global-set-key (kbd "C-h C-f") 'find-function)
 (global-set-key (kbd "C-h C-v") 'find-variable)
 (global-set-key (kbd "C-h C-k") 'find-function-on-key)
-
-;; org
-(setq org-agenda-files '("~/org"))
-(global-set-key (kbd "C-c a") 'org-agenda)
 
 ;; ace-window
 (global-set-key (kbd "M-o") 'ace-window)
