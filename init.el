@@ -1,105 +1,13 @@
 ;;; Commentary:
 
-;;config PATH use shell path
-(defun set-exec-path-from-shell-PATH ()
-  (let ((path-from-shell (replace-regexp-in-string
-                          "[ \t\n]*$"
-                          ""
-                          (shell-command-to-string "$SHELL --login -i -c 'echo $PATH'"))))
-    (setenv "PATH" path-from-shell)
-    (setq eshell-path-env path-from-shell) ; for eshell users
-    (setq exec-path (split-string path-from-shell path-separator))))
-(when window-system (set-exec-path-from-shell-PATH))
-
-;; melpa
-(when (>= emacs-major-version 24)
-     (require 'package)
-     (package-initialize)
-     (setq package-archives '(("gnu"   . "http://elpa.emacs-china.org/gnu/")
-							  ("org"   . "https://orgmode.org/elpa/")
-		      ("melpa" . "http://elpa.emacs-china.org/melpa/"))))
-;; 注意 elpa.emacs-china.org 是 Emacs China 中文社区在国内搭建的一个 ELPA 镜像
-;; cl - Common Lisp Extension
-(require 'cl)
-;; Add Packages
-(defvar my/packages '(
-	              ;; --- Auto-completion ---
-		      company
-		      hungry-delete
-		      swiper
-		      counsel
-		      smartparens
-	              ;; --- Themes ---
-			  ;;monokai-theme
-			  spacemacs-theme
-		      popwin
-		      go-mode
-			  go-guru
-	;;		  flymake-go-staticcheck
-			  org-plus-contrib
-		      ycmd
-		      company-ycmd
-		      flycheck-ycmd
-			  all-the-icons
-			  neotree
-			  imenu-list
-			  helm-ag
-			  shell-pop
-			  projectile
-			  yaml-mode
-			  ace-window
-			  compile
-			  json
-			  cl-lib
-			  auto-complete-clang
-			  clang-format
-			  yasnippet
-	       ;; solarized-theme
-	       ) "Default packages")
-
-(setq package-selected-packages my/packages)
-
-(defun my/packages-installed-p ()
-    (loop for pkg in my/packages
-	  when (not (package-installed-p pkg)) do (return nil)
-	  finally (return t)))
-
-(unless (my/packages-installed-p)
-    (message "%s" "Refreshing package database...")
-    (package-refresh-contents)
-    (dolist (pkg my/packages)
-      (when (not (package-installed-p pkg))
-		(package-install pkg))))
 
 
-;; config clang
-(require 'clang-format)
+(add-to-list 'load-path
+	      (expand-file-name (concat user-emacs-directory "lisp")))
 
-(require 'yasnippet)
-(yas-global-mode 1)
-
-(require 'auto-complete-config)
-(require 'auto-complete-clang)
-
-(setq ac-auto-start nil)
-(setq ac-quick-help-delay 0.5)
-;; (ac-set-trigger-key "TAB")
-;; (define-key ac-mode-map  [(control tab)] 'auto-complete)
-(define-key ac-mode-map  [(control tab)] 'auto-complete)
-(defun my-ac-config ()
-  (setq-default ac-sources '(ac-source-abbrev ac-source-dictionary ac-source-words-in-same-mode-buffers))
-  (add-hook 'emacs-lisp-mode-hook 'ac-emacs-lisp-mode-setup)
-  ;; (add-hook 'c-mode-common-hook 'ac-cc-mode-setup)
-  (add-hook 'ruby-mode-hook 'ac-ruby-mode-setup)
-  (add-hook 'css-mode-hook 'ac-css-mode-setup)
-  (add-hook 'auto-complete-mode-hook 'ac-common-setup)
-  (global-auto-complete-mode t))
-(defun my-ac-cc-mode-setup ()
-  (setq ac-sources (append '(ac-source-clang ac-source-yasnippet) ac-sources)))
-(add-hook 'c-mode-common-hook 'my-ac-cc-mode-setup)
-;; ac-source-gtags
-(my-ac-config)
-
+(require 'init-package)
+(require 'init-ui)
+(require 'init-shell)
 
 ;; config for go-mode
 ;;(add-to-list 'load-path "~/.emacs.d/elpa/go-mode-20181012.329/")
@@ -115,16 +23,6 @@
 ;; config go staticcheck
 ;;(add-hook 'go-mode-hook #'flymake-go-staticcheck-enable)
 ;;(add-hook 'go-mode-hook #'flymake-mode)
-
-
-;;config for spacemacs-theme'
-(require 'spacemacs-common)
-(deftheme spacemacs-dark "Spacemacs theme,the dark version")
-(create-spacemacs-theme 'dark 'spacemacs-dark)
-(provide-theme 'spacemacs-dark)
-;;加载主题
-;;(load-theme 'monokai t)
-(load-theme 'spacemacs-dark t)
 
 ;;config for all-the-icons
 (require 'all-the-icons)
