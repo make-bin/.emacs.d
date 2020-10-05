@@ -1,10 +1,5 @@
 ;;; Commentary:
 
-;;; Code:
-;;;(add-to-list 'load-path "~/.emacs.d/lisp/")
-;;;(require 'go-mode)
-;;;(add-hook 'before-save-hook 'gofmt-before-save)
-
 ;;config PATH use shell path
 (defun set-exec-path-from-shell-PATH ()
   (let ((path-from-shell (replace-regexp-in-string
@@ -39,6 +34,8 @@
 			  spacemacs-theme
 		      popwin
 		      go-mode
+			  go-guru
+	;;		  flymake-go-staticcheck
 			  org-plus-contrib
 		      ycmd
 		      company-ycmd
@@ -51,6 +48,12 @@
 			  projectile
 			  yaml-mode
 			  ace-window
+			  compile
+			  json
+			  cl-lib
+			  auto-complete-clang
+			  clang-format
+			  yasnippet
 	       ;; solarized-theme
 	       ) "Default packages")
 
@@ -66,14 +69,52 @@
     (package-refresh-contents)
     (dolist (pkg my/packages)
       (when (not (package-installed-p pkg))
-	(package-install pkg))))
+		(package-install pkg))))
+
+
+;; config clang
+(require 'clang-format)
+
+(require 'yasnippet)
+(yas-global-mode 1)
+
+(require 'auto-complete-config)
+(require 'auto-complete-clang)
+
+(setq ac-auto-start nil)
+(setq ac-quick-help-delay 0.5)
+;; (ac-set-trigger-key "TAB")
+;; (define-key ac-mode-map  [(control tab)] 'auto-complete)
+(define-key ac-mode-map  [(control tab)] 'auto-complete)
+(defun my-ac-config ()
+  (setq-default ac-sources '(ac-source-abbrev ac-source-dictionary ac-source-words-in-same-mode-buffers))
+  (add-hook 'emacs-lisp-mode-hook 'ac-emacs-lisp-mode-setup)
+  ;; (add-hook 'c-mode-common-hook 'ac-cc-mode-setup)
+  (add-hook 'ruby-mode-hook 'ac-ruby-mode-setup)
+  (add-hook 'css-mode-hook 'ac-css-mode-setup)
+  (add-hook 'auto-complete-mode-hook 'ac-common-setup)
+  (global-auto-complete-mode t))
+(defun my-ac-cc-mode-setup ()
+  (setq ac-sources (append '(ac-source-clang ac-source-yasnippet) ac-sources)))
+(add-hook 'c-mode-common-hook 'my-ac-cc-mode-setup)
+;; ac-source-gtags
+(my-ac-config)
+
 
 ;; config for go-mode
 ;;(add-to-list 'load-path "~/.emacs.d/elpa/go-mode-20181012.329/")
 ;;(autoload 'go-mode "go-mode" nil t)
 ;;(add-to-list 'auto-mode-alist '("\\.go\\'" . go-mode))
+(setq gofmt-command "goimports")
 (add-hook 'before-save-hook 'gofmt-before-save)
 
+;; config for go-guru
+(require 'go-guru)
+(add-hook 'go-mode-hook #'go-guru-hl-identifier-mode)
+
+;; config go staticcheck
+;;(add-hook 'go-mode-hook #'flymake-go-staticcheck-enable)
+;;(add-hook 'go-mode-hook #'flymake-mode)
 
 
 ;;config for spacemacs-theme'
@@ -161,6 +202,7 @@
 
 ;; 显示行号
 (global-linum-mode 1)
+;;(setq display-line-numbers-mode t)
 
 ;; 关闭启动帮助画面
 (setq inhibit-splash-screen 1)
@@ -274,7 +316,8 @@
 (add-hook 'after-init-hook #'global-ycmd-mode)
 
 ;; Specify how to run the server
-(set-variable 'ycmd-server-command '("python" "/Users/makebin/.emacs.d/ycmd/ycmd"))
+(set-variable 'ycmd-server-command '("/usr/local/bin/python3.7" "/Users/makebin/.emacs.d/ycmd/ycmd"))
+(setq ycmd-startup-timeout 5)
 ;; Specify a global emacs configuration
 (set-variable 'ycmd-global-config "/Users/makebin/.emacs.d/ycmd/examples/.ycm_extra_conf.py")
 
