@@ -50,4 +50,21 @@
 (require 'hungry-delete)
 (global-hungry-delete-mode)
 
+
+;;config for smartparens
+(require 'smartparens-config)
+;;(add-hook 'emacs-lisp-mode-hook 'smartparens-mode)
+(smartparens-global-mode t)
+
+;;set tab width with 4
+(setq-default tab-width 4)
+
+;; find key
+(global-set-key (kbd "C-h C-f") 'find-function)
+(global-set-key (kbd "C-h C-v") 'find-variable)
+(global-set-key (kbd "C-h C-k") 'find-function-on-key)
+
+
+(defalias 'yes-or-no-p 'y-or-n-p)
+
 (provide 'init-common)

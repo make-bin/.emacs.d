@@ -5,10 +5,17 @@
 (add-to-list 'load-path
 	      (expand-file-name (concat user-emacs-directory "lisp")))
 
+(setq custom-file (expand-file-name "custom.el" user-emacs-directory))
+
+
 (require 'init-package)
 (require 'init-ui)
 (require 'init-shell)
 (require 'init-common)
+(require 'init-window)
+(require 'init-ac)
+(require 'init-search)
+(require 'init-tree)
 
 ;; config for go-mode
 ;;(add-to-list 'load-path "~/.emacs.d/elpa/go-mode-20181012.329/")
@@ -24,74 +31,6 @@
 ;; config go staticcheck
 ;;(add-hook 'go-mode-hook #'flymake-go-staticcheck-enable)
 ;;(add-hook 'go-mode-hook #'flymake-mode)
-
-;;config for all-the-icons
-(require 'all-the-icons)
-
-;;config for neotree
-(require 'neotree)
-(global-set-key (kbd "C-c p t") 'neotree-toggle)
-;;(global-set-key (kbd "C-c p t") 'neotree-projectile-action)
-
-(setq neo-theme (if (display-graphic-p) 'icons 'arrow))
-(setq-default neo-autorefresh t)
-
-;;config imenu-list
-(global-set-key (kbd "C-'") 'imenu-list-smart-toggle)'
-(setq imenu-list-auto-resize t)
-(setq imenu-list-after-jump-hook nil)
-
-
-;;config for helm-ag
-(require 'helm-ag)
-(global-set-key (kbd "C-c s f") 'helm-do-ag-this-file)
-(global-set-key (kbd "C-c s p") 'helm-ag-project-root)
-
-;;config for shell-pop
-(require 'shell-pop)
-
-;;config projectile
-(require 'projectile)
-
-
-(custom-set-variables
- ;; custom-set-variables was added by Custom.
- ;; If you edit it by hand, you could mess it up, so be careful.
- ;; Your init file should contain only one such instance.
- ;; If there is more than one, they won't work right.
- '(company-idle-delay 0)
- '(company-minimum-prefix-length 1)
- '(custom-safe-themes
-   (quote
-	("bd7b7c5df1174796deefce5debc2d976b264585d51852c962362be83932873d9" default)))
- '(helm-ag-base-command "ag --nocolor --nogroup --ignore-case")
- '(helm-ag-command-option "--all-text")
- '(helm-ag-fuzzy-match t)
- '(helm-ag-ignore-buffer-patterns (quote ("\\.txt\\'" "\\.mkd\\'")))
- '(helm-ag-insert-at-point (quote symbol))
- '(package-selected-packages
-   (quote
-	(adjust-parens company hungry-delete swiper counsel smartparens monokai-theme spacemacs-theme popwin go-mode ycmd company-ycmd flycheck-ycmd neotree)))
- '(shell-pop-default-directory "/Users/kyagi/git")
- '(shell-pop-full-span t)
- '(shell-pop-shell-type
-   (quote
-	("ansi-term" "*ansi-term*"
-	 (lambda nil
-	   (ansi-term shell-pop-term-shell)))))
- '(shell-pop-term-shell "/bin/bash")
- '(shell-pop-universal-key "C-t")
- '(shell-pop-window-position "right")
- '(shell-pop-window-size 30)
- '(spacemacs-theme-custom-colors
-   (quote
-	((act1 . "#ff0000")
-	 (act2 . "#0000ff")
-	 (var . "#756df7")
-	 (base . "#ffffff")))))
-
-
-
 
 
 ;;打开最近编辑的文件
@@ -110,79 +49,6 @@
 ;;(setq org-startup-indented t)
 ;; 设置 bullet list
 ;;(setq org-bullets-bullet-list '("☰" "☷" "☯" "☭"))
-
-
-
-;;config for swiper
-(ivy-mode 1)
-(setq ivy-use-virtual-buffers t)
-(setq enable-recursive-minibuffers t)
-;; enable this if you want `swiper' to use it
-;; (setq search-default-mode #'char-fold-to-regexp)
-(global-set-key "\C-s" 'swiper)
-(global-set-key (kbd "C-c C-r") 'ivy-resume)
-(global-set-key (kbd "<f6>") 'ivy-resume)
-(global-set-key (kbd "M-x") 'counsel-M-x)
-(global-set-key (kbd "C-x C-f") 'counsel-find-file)
-
-(global-set-key (kbd "C-c p f") 'counsel-git)
-
-
-;;config for smartparens
-(require 'smartparens-config)
-;;(add-hook 'emacs-lisp-mode-hook 'smartparens-mode)
-(smartparens-global-mode t)
-
-;;set tab width with 4
-(setq-default tab-width 4)
-
-;; find key
-(global-set-key (kbd "C-h C-f") 'find-function)
-(global-set-key (kbd "C-h C-v") 'find-variable)
-(global-set-key (kbd "C-h C-k") 'find-function-on-key)
-
-;; ace-window
-(global-set-key (kbd "M-o") 'ace-window)
-(setq aw-keys '(?1 ?2 ?3 ?4 ?5 ?6 ?7 ?8 ?9))
-(setq aw-background nil)
-(defvar aw-dispatch-alist
-  '((?x aw-delete-window "Delete Window")
-	(?m aw-swap-window "Swap Windows")
-	(?M aw-move-window "Move Window")
-	(?c aw-copy-window "Copy Window")
-	(?j aw-switch-buffer-in-window "Select Buffer")
-	(?n aw-flip-window)
-	(?u aw-switch-buffer-other-window "Switch Buffer Other Window")
-	(?c aw-split-window-fair "Split Fair Window")
-	(?v aw-split-window-vert "Split Vert Window")
-	(?b aw-split-window-horz "Split Horz Window")
-	(?o delete-other-windows "Delete Other Windows")
-	(?? aw-show-dispatch-help))
-  "List of actions for `aw-dispatch-default'.")
-
-
-
-;;ycmd
-(require 'ycmd)
-(add-hook 'after-init-hook #'global-ycmd-mode)
-
-;; Specify how to run the server
-(set-variable 'ycmd-server-command '("/usr/local/bin/python3.7" "/Users/makebin/.emacs.d/ycmd/ycmd"))
-(setq ycmd-startup-timeout 5)
-;; Specify a global emacs configuration
-(set-variable 'ycmd-global-config "/Users/makebin/.emacs.d/ycmd/examples/.ycm_extra_conf.py")
-
-;; Completion framework
-(require 'company-ycmd)
-(company-ycmd-setup)
-(add-hook 'after-init-hook #'global-company-mode)
-
-;; Enable flycheck
-(require 'flycheck-ycmd)
-(flycheck-ycmd-setup)
-(add-hook 'after-init-hook #'global-flycheck-mode)
-
-
 
 (custom-set-faces
  ;; custom-set-faces was added by Custom.

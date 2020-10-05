@@ -9,4 +9,7 @@
     (setq exec-path (split-string path-from-shell path-separator))))
 (when window-system (set-exec-path-from-shell-PATH))
 
+;;config for shell-pop
+(require 'shell-pop)
+
 (provide 'init-shell)
