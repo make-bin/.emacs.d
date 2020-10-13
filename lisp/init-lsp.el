@@ -3,7 +3,6 @@
 
 (use-package lsp-mode
     :hook  ((lsp-mode . lsp-enable-which-key-integration)
-		   (go-mode . lsp-deferred)
 		   (c-mode . lsp-deferred))
     :commands (lsp lsp-deferred)
     :init (setq lsp-keep-workspace-alive nil ;; Auto kill LSP server
@@ -44,7 +43,6 @@
   :hook ((lsp-mode . dap-mode)
          (dap-mode . dap-ui-mode)
 	     (dap-mode . dap-tooltip-mode)
-         (go-mode . (lambda() (require 'dap-go)))
          (c-mode . (lambda() (require 'dap-c)))))
 
 
