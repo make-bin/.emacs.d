@@ -38,9 +38,8 @@
 			  compile
 			  json
 			  cl-lib
-			  auto-complete-clang
-			  clang-format
-			  yasnippet
+			  use-package
+			  markdown-mode
 	       ;; solarized-theme
 			  ) "Default packages")
 

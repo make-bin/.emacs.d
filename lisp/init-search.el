@@ -1,5 +1,16 @@
-;;config for helm-ag
-(require 'helm-ag)
+;;;config for helm-ag
+
+
+(use-package helm-ag
+  :ensure nil
+  :config
+  (setq helm-ag-base-command "ag --nocolor --nogroup --ignore-case")
+  (setq helm-ag-command-option "--all-text")
+  (setq helm-ag-fuzzy-match t)
+  (setq helm-ag-use-temp-buffer t)
+  (setq helm-ag-ignore-buffer-patterns (quote ("\\.txt\\'" "\\.mkd\\'")))
+  (setq helm-ag-insert-at-point (quote symbol)))
+
 (global-set-key (kbd "C-c s f") 'helm-do-ag-this-file)
 (global-set-key (kbd "C-c s p") 'helm-ag-project-root)
 

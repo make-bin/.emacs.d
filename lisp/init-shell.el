@@ -1,15 +1,15 @@
-;;config PATH use shell path
-(defun set-exec-path-from-shell-PATH ()
-  (let ((path-from-shell (replace-regexp-in-string
-                          "[ \t\n]*$"
-                          ""
-                          (shell-command-to-string "$SHELL --login -i -c 'echo $PATH'"))))
-    (setenv "PATH" path-from-shell)
-    (setq eshell-path-env path-from-shell) ; for eshell users
-    (setq exec-path (split-string path-from-shell path-separator))))
-(when window-system (set-exec-path-from-shell-PATH))
-
-;;config for shell-pop
-(require 'shell-pop)
+(use-package shell-pop
+  :ensure t
+  :bind ("C-t" . shell-pop)
+  :config
+  (setq shell-pop-default-directory "/Users/kyagi/git")
+  (setq shell-pop-shell-type (quote ("ansi-term" "*ansi-term*" (lambda nil (ansi-term shell-pop-term-shell)))))
+  (setq shell-pop-term-shell "/bin/bash") 
+  (setq shell-pop-window-size 30)
+  (setq shell-pop-full-span t)
+  (setq shell-pop-window-position "right")
+  (setq shell-pop-autocd-to-working-dir t)
+  (setq shell-pop-restore-window-configuration t)
+  (setq shell-pop-cleanup-buffer-at-process-exit t))
 
 (provide 'init-shell)
