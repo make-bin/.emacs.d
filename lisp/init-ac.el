@@ -1,3 +1,5 @@
+;;; package --- Summary
+;;; Commentary:
 ;;ycmd
 (require 'ycmd)
 (add-hook 'after-init-hook #'global-ycmd-mode)

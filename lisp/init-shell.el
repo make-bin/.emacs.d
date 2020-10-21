@@ -1,3 +1,5 @@
+;;; package --- Summary
+;;; Commentary:
 (use-package shell-pop
   :ensure t
   :bind ("C-t" . shell-pop)

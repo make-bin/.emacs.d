@@ -1,3 +1,5 @@
+;;; package --- Summary
+;;; Commentary:
 ;; ace-window
 (global-set-key (kbd "M-o") 'ace-window)
 (setq aw-keys '(?1 ?2 ?3 ?4 ?5 ?6 ?7 ?8 ?9))

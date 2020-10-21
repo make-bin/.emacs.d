@@ -1,3 +1,5 @@
+;;; package --- Summary
+;;; Commentary:
 ;; set prefix for lsp-command-keymap (few alternatives - "C-l", "C-c l")
 (setq lsp-keymap-prefix "s-l")
 

@@ -1,4 +1,5 @@
-
+;;; package --- Summary
+;;; Commentary:
 ;;config for spacemacs-theme'
 (require 'spacemacs-common)
 (deftheme spacemacs-dark "Spacemacs theme,the dark version")

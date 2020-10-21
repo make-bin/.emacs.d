@@ -1,3 +1,5 @@
+;;; package --- Summary
+;;; Commentary:
 ;; melpa
 (when (>= emacs-major-version 24)
      (require 'package)

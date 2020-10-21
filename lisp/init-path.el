@@ -1,3 +1,5 @@
+;;; package --- Summary
+;;; Commentary:
 ;;config PATH use shell path
 (defun set-exec-path-from-shell-PATH ()
   (let ((path-from-shell (replace-regexp-in-string

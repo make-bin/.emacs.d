@@ -1,4 +1,5 @@
-
+;;; package --- Summary
+;;; Commentary:
 
 ;;config projectile
 (require 'projectile)
