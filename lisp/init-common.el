@@ -6,6 +6,11 @@
 ;; 关闭文件滑动控件
 (scroll-bar-mode -1)
 
+;; 字体大小
+(global-set-key (kbd "C-=") 'text-scale-increase)
+(global-set-key (kbd "C--") 'text-scale-decrease)
+(global-set-key (kbd "C-0") 'text-scale-adjust)
+
 ;; 显示行号
 (global-linum-mode 1)
 ;;(setq display-line-numbers-mode t)
