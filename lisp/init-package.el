@@ -42,6 +42,7 @@
 			  cl-lib
 			  use-package
 			  markdown-mode
+			  dashboard
 	       ;; solarized-theme
 			  ) "Default packages")
 

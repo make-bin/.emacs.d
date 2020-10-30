@@ -7,6 +7,7 @@
 
 (require 'init-path)
 (require 'init-package)
+(require 'init-dashboard)
 (require 'init-ui)
 (require 'init-shell)
 (require 'init-common)
@@ -17,6 +18,7 @@
 (require 'init-markdown)
 ;;(require 'init-lsp)
 (require 'init-go)
+
 
 
 
