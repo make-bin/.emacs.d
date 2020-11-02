@@ -1,25 +1,22 @@
 ;;; package --- Summary
 ;;; Commentary:
-;;(require 'dashboard)
-;;(dashboard-setup-startup-hook)
-;; Or if you use use-package
 (use-package dashboard
   :ensure t
   :config
   (setq initial-buffer-choice (lambda () (get-buffer "*dashboard*")))
   ;; Set the title
-  (setq dashboard-banner-logo-title "Welcome to Emacs Dashboard")
+  (setq dashboard-banner-logo-title "大部分时间我都机制的一比")
   ;; Set the banner
   (setq dashboard-startup-banner "~/.emacs.d/image/image.png")
   ;; Content is not centered by default. To center, set
   (setq dashboard-center-content t)
   ;; To disable shortcut "jump" indicators for each section, set
   (setq dashboard-show-shortcuts nil)
-  (setq dashboard-items '((recents  . 5)
-                          (bookmarks . 5)
-                          (projects . 5)
-                          (agenda . 5)
-                          (registers . 5)))
+  (setq dashboard-items '((recents  . 20)
+ ;;                         (bookmarks . 5)
+                          (projects . 5)))
+;;                          (agenda . 5)
+;;                          (registers . 5)))
   (setq dashboard-set-heading-icons t)
   (setq dashboard-set-file-icons t)
   (setq dashboard-set-navigator t)
