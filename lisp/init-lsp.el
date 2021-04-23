@@ -1,51 +1,37 @@
 ;;; package --- Summary
 ;;; Commentary:
-;; set prefix for lsp-command-keymap (few alternatives - "C-l", "C-c l")
-(setq lsp-keymap-prefix "s-l")
+
 
 (use-package lsp-mode
-    :hook  ((lsp-mode . lsp-enable-which-key-integration)
-		   (c-mode . lsp-deferred))
-    :commands (lsp lsp-deferred)
-    :init (setq lsp-keep-workspace-alive nil ;; Auto kill LSP server
-                lsp-enable-indentation nil
-                lsp-enable-on-type-formatting nil
-                lsp-auto-guess-root nil
-                lsp-enable-snippet t))
-;;    :config
-    ;; Configure LSP Clients
-;;    (use-package lsp-clients
-;;      :ensure nil
-;;      :functions (lsp-format-buffer lsp-organize-imports)))
+  :ensure t
+  :commands (lsp lsp-deferred)
+  :hook (go-mode . lsp-deferred))
 
+;; Set up before-save hooks to format buffer and add/delete imports.
+;; Make sure you don't have other gofmt/goimports hooks enabled.
+(defun lsp-go-install-save-hooks ()
+  (add-hook 'before-save-hook #'lsp-format-buffer t t)
+  (add-hook 'before-save-hook #'lsp-organize-imports t t))
+(add-hook 'go-mode-hook #'lsp-go-install-save-hooks)
 
-;;; Optionally: lsp-ui, company-lsp
+;; Optional - provides fancier overlays.
 (use-package lsp-ui
-  :after lsp-mode
-  :hook (lsp-mode . lsp-ui-mode)
-  :init (setq lsp-ui-doc-enable t
-              lsp-ui-doc-use-webkit nil
-              lsp-ui-doc-delay 0
-              lsp-ui-doc-include-signature t
-              lsp-ui-doc-position 'at-point
-              lsp-eldoc-enable-hover nil ;; Disable eldoc displays in minibuffer
-              lsp-ui-sideline-enable t
-              lsp-ui-sideline-show-hover nil
-              lsp-ui-sideline-show-diagnostics nil
-              lsp-ui-sideline-ignore-duplicate t)
-  :config (setq lsp-ui-flycheck-enable t)
+  :ensure t
   :commands lsp-ui-mode)
 
+;; Company mode is a standard completion package that works well with lsp-mode.
+(use-package company
+  :ensure t
+  :config
+  ;; Optionally enable completion-as-you-type behavior.
+  (setq company-idle-delay 0)
+  (setq company-minimum-prefix-length 1))
 
-(use-package lsp-ivy :commands lsp-ivy-workspace-symbol)
-(use-package lsp-treemacs :commands lsp-treemacs-errors-list)
-
-(use-package dap-mode
-  :diminish
-  :hook ((lsp-mode . dap-mode)
-         (dap-mode . dap-ui-mode)
-	     (dap-mode . dap-tooltip-mode)
-         (c-mode . (lambda() (require 'dap-c)))))
+;; Optional - provides snippet support.
+(use-package yasnippet
+  :ensure t
+  :commands yas-minor-mode
+  :hook (go-mode . yas-minor-mode))
 
 
 (provide 'init-lsp)

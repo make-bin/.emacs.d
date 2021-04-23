@@ -16,8 +16,9 @@
 (require 'init-search)
 (require 'init-tree)
 (require 'init-markdown)
-;;(require 'init-lsp)
 (require 'init-go)
+(require 'init-lsp)
+
 
 
 
