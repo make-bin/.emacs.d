@@ -5,7 +5,7 @@
   :config
   (setq initial-buffer-choice (lambda () (get-buffer "*dashboard*")))
   ;; Set the title
-  (setq dashboard-banner-logo-title "大部分时间我都机制的一比")
+  (setq dashboard-banner-logo-title "拥抱梦想，永远年少")
   ;; Set the banner
   (setq dashboard-startup-banner "~/.emacs.d/image/image.png")
   ;; Content is not centered by default. To center, set
