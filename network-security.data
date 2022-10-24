@@ -1,0 +1,4 @@
+(
+ (:id "sha1:85b31c268009209a8d3c5387033b219264f7e62b" :fingerprint "sha1:77:9b:1f:51:47:79:b0:7b:a4:b1:59:93:b2:7e:60:20:17:63:a1:e0" :host "melpa.org:443" :conditions (:expired :invalid))
+ (:id "sha1:24c7a1e6369fef1e50de1deb1a9e5bbc68f80c8b" :fingerprint "sha1:03:2d:8c:37:ce:7d:34:c9:7c:08:8d:c2:88:2f:64:8b:3d:b3:32:c4" :host "orgmode.org:443" :conditions (:expired :invalid))
+)

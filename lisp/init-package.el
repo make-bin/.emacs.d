@@ -4,7 +4,8 @@
 (when (>= emacs-major-version 24)
      (require 'package)
      (package-initialize)
-     (setq package-archives '(("gnu"   . "http://elpa.emacs-china.org/gnu/")
+     (setq package-archives '(("melpa" . "https://melpa.org/packages/")
+							  ("gnu"   . "http://elpa.emacs-china.org/gnu/")
 							  ("org"   . "https://orgmode.org/elpa/")
 		      ("melpa" . "http://elpa.emacs-china.org/melpa/"))))
 ;; 注意 elpa.emacs-china.org 是 Emacs China 中文社区在国内搭建的一个 ELPA 镜像
@@ -23,8 +24,10 @@
 			  spacemacs-theme
 		      popwin
 		      go-mode
+;;			  guru-mode
 			  go-guru
-	;;		  flymake-go-staticcheck
+;;			  lsp-mode
+			  ;;		  flymake-go-staticcheck
 			  org-plus-contrib
 		      ycmd
 		      company-ycmd
@@ -43,6 +46,7 @@
 			  use-package
 			  markdown-mode
 			  dashboard
+			  dash
 	       ;; solarized-theme
 			  ) "Default packages")
 
